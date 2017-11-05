@@ -386,6 +386,45 @@ head(bigTreeData) #confirm there is some data there</code></pre>
 <pre><code>## Error in rbind(deparse.level, ...): numbers of columns of arguments do not match</code></pre>
 <pre class="r"><code>length(bigTreeData$dbh)</code></pre>
 <pre><code>## [1] 94</code></pre>
+<p>Oops, guess what didn’t work. <strong>rbind.</strong> as you can probably gather from the error we have an issue with the columns. It also helps that we checked the length as we can see that it didn’t change.</p>
+<p>Let’s look at the columns names and figure out whats going on. we can stretch our loop legs while we are at it.</p>
+<p>Need to fix this code so it’s a loop.</p>
+<pre class="r"><code>colnames(group1plot1)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;Cir&quot;     &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group1plot2)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;Cir&quot;     &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group2)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;Cir&quot;     &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group3)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group4)</code></pre>
+<pre><code>## [1] &quot;plot&quot;  &quot;cir&quot;   &quot;dbh&quot;   &quot;sp&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group5)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group6plot1)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;cir&quot;     &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<pre class="r"><code>colnames(group6plot2)</code></pre>
+<pre><code>## [1] &quot;treeNum&quot; &quot;cir&quot;     &quot;dbh&quot;     &quot;sp&quot;      &quot;plot&quot;    &quot;group&quot;</code></pre>
+<p>AS you can see the column names are not all the same. We are going to have to drop/keep some of the columns to make <strong>rbind</strong> work.</p>
+<p>We just need <strong>dbh, sp, plot, group</strong>.</p>
+<pre class="r"><code># select variables &quot;dbh&quot;, &quot;sp&quot;, &quot;plot&quot;, &quot;group&quot;
+vars &lt;- c(&quot;dbh&quot;, &quot;sp&quot;, &quot;plot&quot;, &quot;group&quot;)
+
+subgroup1plot1 &lt;- group1plot1[vars]
+subgroup1plot2 &lt;- group1plot2[vars]
+subgroup2 &lt;- group2[vars]
+subgroup3 &lt;- group3[vars]
+subgroup4 &lt;- group4[vars]
+subgroup5 &lt;- group5[vars]
+subgroup6plot1 &lt;- group6plot1[vars]
+subgroup6plot2 &lt;- group6plot2[vars]
+
+colnames(subgroup1plot1)</code></pre>
+<pre><code>## [1] &quot;dbh&quot;   &quot;sp&quot;    &quot;plot&quot;  &quot;group&quot;</code></pre>
+<p>Ok, a vertical merge using <strong>rbind</strong> should work now.</p>
+<pre class="r"><code>bigTreeData &lt;- rbind(subgroup1plot1, subgroup1plot2, subgroup2, subgroup3, subgroup4, subgroup5, subgroup6plot1, subgroup6plot2) # combine all dataframes
+length(bigTreeData$dbh)</code></pre>
+<pre><code>## [1] 223</code></pre>
 </div>
 <div id="including-plots" class="section level4">
 <h4>Including Plots</h4>
