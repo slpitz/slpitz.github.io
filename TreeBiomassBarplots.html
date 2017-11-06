@@ -435,6 +435,63 @@ length(bigTreeData$dbh)</code></pre>
 
 </div>
 <p>Me too.</p>
+<p>We are going to use a command called <strong>summarySE()</strong> that will summarize our data by different variables. It also will give us the standard deviation, standard error, and confidence interval.</p>
+<p>So we are going to first summarize our data by species. Before we use the summarySE() command lets see how many species there are using the <strong>unique()</strong> command.</p>
+<pre class="r"><code>unique(bigTreeData$sp)</code></pre>
+<pre><code>##  [1] White Oak             Black Gum             Red Oak              
+##  [4] Red Maple             Chestnut Oak          American Beech       
+##  [7] Yellow Birch          Fraxinus              Quercus prinus       
+## [10] Quercus rubra         standing dead         Nyssa sylvatica      
+## [13] Cherry                Quercus alba          Standing dead        
+## [16] Fagus grandifolia     Acer rubrum           Betula allegheniensis
+## [19] Eastern Sycamore      Hickory               Tulip Popler         
+## [22] Yellow Birtch         Moutian Laural        Hickery              
+## [25] Witch Hazel           Standing Dead         Tulip Tree           
+## [28] Mountain Laurel       Jiickory              Red Oak              
+## [31] Yellow Birch         
+## 31 Levels: American Beech Black Gum Chestnut Oak Red Maple ... Yellow Birch</code></pre>
+<p>Well, that’s not good. And you thought we were done data wrangling. We will never be done. <em>Ever.</em></p>
+<p>Let’s look at the damage a different way using the <strong>summarySE()</strong> command.</p>
+<pre class="r"><code>library(Rmisc) # you need this library</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: plyr</code></pre>
+<pre class="r"><code>bySpecies &lt;- summarySE(bigTreeData, measurevar=&quot;dbh&quot;, groupvars=c(&quot;sp&quot;))</code></pre>
+<pre><code>## Warning in qt(conf.interval/2 + 0.5, datac$N - 1): NaNs produced</code></pre>
+<pre class="r"><code>bySpecies</code></pre>
+<pre><code>##                       sp  N       dbh        sd        se         ci
+## 1         American Beech 19 24.097949 31.419132  7.208043  15.143537
+## 2              Black Gum 56 16.123284 19.468757  2.601622   5.213767
+## 3           Chestnut Oak 12 28.540652 20.160902  5.819951  12.809626
+## 4              Red Maple 19 35.145991 32.389762  7.430721  15.611366
+## 5                Red Oak 32 49.136204 40.180925  7.103051  14.486768
+## 6              White Oak 11 51.611173 30.164843  9.095042  20.265017
+## 7           Yellow Birch  9 10.208917  5.549377  1.849792   4.265629
+## 8            Acer rubrum  1  9.867606        NA        NA        NaN
+## 9  Betula allegheniensis  1 10.822536        NA        NA        NaN
+## 10                Cherry  1 16.233804        NA        NA        NaN
+## 11     Fagus grandifolia  1 35.650707        NA        NA        NaN
+## 12              Fraxinus  1  5.092958        NA        NA        NaN
+## 13       Nyssa sylvatica 15 11.841128  5.869591  1.515522   3.250471
+## 14          Quercus alba  1 22.281692        NA        NA        NaN
+## 15        Quercus prinus  1 59.842259        NA        NA        NaN
+## 16         Quercus rubra  6 37.348360  8.848022  3.612190   9.285430
+## 17         standing dead  1  1.909859        NA        NA        NaN
+## 18         Standing dead  8  4.496127  3.314257  1.171767   2.770788
+## 19      Eastern Sycamore  1  5.600000        NA        NA        NaN
+## 20               Hickory  7 23.971429 12.195179  4.609344  11.278659
+## 21        Moutian Laural  1  3.501409        NA        NA        NaN
+## 22          Tulip Popler  1 26.738030        NA        NA        NaN
+## 23         Yellow Birtch  1 10.981691        NA        NA        NaN
+## 24               Hickery  2 44.500000  3.535534  2.500000  31.765512
+## 25              Jiickory  1  7.000000        NA        NA        NaN
+## 26       Mountain Laurel  2 14.300000 16.546299 11.700000 148.662595
+## 27         Standing Dead  6 39.083333 17.990044  7.344405  18.879393
+## 28            Tulip Tree  2 65.500000 26.162951 18.500000 235.064788
+## 29           Witch Hazel  2 17.000000  0.000000  0.000000   0.000000
+## 30              Red Oak   1 35.300000        NA        NA        NaN
+## 31         Yellow Birch   1 18.200000        NA        NA         NA</code></pre>
+<p>Oh crap. That’s not good. There’s definitely not 31 species at McKaig Woods. If you look carefully, you can see that there are some common names mixed with Latin names, and some misspellings. What the heck is a Jiickory?</p>
+<p>So the lesson here is be careful how you enter your field data or it might cause you headaches later.</p>
 </div>
 <div id="go-over-anovas-in-more-detail" class="section level3">
 <h3>3. Go over ANOVAs in more detail</h3>
