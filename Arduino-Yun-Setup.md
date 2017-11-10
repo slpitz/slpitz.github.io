@@ -22,4 +22,4 @@ So to that end, adding a SD card to the Yun is a good idea and easy to do. There
 
 If you want to embed images, this is how you do it:
 
-![Image of Dropbox App](https://octodex.github.com/images/yaktocat.png)
+![Image of Dropbox App](https://github.com/slpitz/slpitz.github.io/blob/master/images/dropbox%20app%20shot.png)
