@@ -18,3 +18,8 @@ You may need to factory reset your Yun. To do so you should [check out this page
 When we get to the third part of this process, installing Dropbox, we use up most of the remaining space or memory. While sometimes the data from data logging doesn't take up much space, its still helpful to have extra in the case where the logged data doesnt get downloaded/offloaded often.
 
 So to that end, adding a SD card to the Yun is a good idea and easy to do. There is already an easy
+
+
+If you want to embed images, this is how you do it:
+
+![Image of Dropbox App](https://octodex.github.com/images/yaktocat.png)
